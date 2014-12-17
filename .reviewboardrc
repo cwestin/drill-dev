@@ -1,0 +1,4 @@
+REPOSITORY = 'git://git.apache.org/incubator-drill.git'
+TARGET_GROUPS = 'drill-git'
+GUESS_FIELDS = True
+REVIEWBOARD_URL = "https://reviews.apache.org"
