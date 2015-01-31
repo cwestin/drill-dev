@@ -1,0 +1,3 @@
+#!/bin/sh
+version=0.4.0-incubating-SNAPSHOT
+clush -w ucs-node18,ucs-node19 /opt/mapr/drill/drill-1.0.0/apache-drill-$version/bin/drillbit.sh stop 

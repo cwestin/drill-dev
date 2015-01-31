@@ -1,0 +1,1 @@
+clush -g drillbits /opt/mapr/drill/drill-1.0.0/apache-drill-1.0.0-m2-incubating-SNAPSHOT/bin/drillbit.sh restart

@@ -1,0 +1,1 @@
+/opt/mapr/drill/drill-1.0.0/apache-drill-$version/bin/sqlline -u "jdbc:drill:schema=dfs.m7"

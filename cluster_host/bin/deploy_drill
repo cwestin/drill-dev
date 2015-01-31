@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+die () {
+    echo >&2 "$@"
+    exit 1
+}
+[ "$#" -eq 1 ] || die "1 argument required, $# provided"
+
+cd /root/src/drill
+git fetch
+git checkout $1
+mvn clean install -DskipInterpreter -DskipTests -Pmapr
+stop_drillbits
+
+# assume that the first node in the cluster conf is this one
+DRILL_CTRL = `head -n 1 /root/bin/cluster.conf`
+
+. version.sh
+clush -g drillbits rm -rf /opt/mapr/drill/drill-1.0.0/apache-drill-$version/
+clush -g drillbits "scp -r $DRILL_CTRL:/root/src/drill/distribution/target/apache-drill-$version/apache-drill-$version /opt/mapr/drill/drill-1.0.0/"

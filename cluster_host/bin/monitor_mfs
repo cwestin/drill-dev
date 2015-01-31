@@ -1,0 +1,3 @@
+#!/bin/bash
+
+while true; do  kwikrun -p "echo \`hostname -s; pgrep mfs | awk '{print \$1}' | xargs top -b -n 1 -p | grep mfs\` | tr \" \" \"\t\"" | sort; echo "";sleep 1; done

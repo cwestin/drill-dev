@@ -1,0 +1,3 @@
+#!/bin/sh
+. version.sh
+clush -g drillbits /opt/mapr/drill/drill-1.0.0/apache-drill-$version/bin/drillbit.sh stop 

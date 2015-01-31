@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ $# -ne 2 ] 
+then
+  echo "copy2allnodes <src_path> <dst_path>"
+  exit 1
+fi
+
+IPS=$(ifconfig 2>/dev/null | grep "inet addr:" | awk -F: '{print $2}' | awk '{print $1}' | tr '\n' ' ')
+IPS="$IPS `hostname`"
+
+for node in `cat /root/bin/cluster.conf`
+do
+  if echo $IPS | grep $node &> /dev/null ; then
+    continue
+  fi
+
+  echo Coying to node ${node}
+  scp $1 ${node}:$2
+done

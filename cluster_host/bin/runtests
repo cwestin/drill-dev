@@ -1,0 +1,6 @@
+cd /mapr/cwestin.cluster.com/drill/scripts/queries
+for f in `ls *.q`
+do
+echo "RUNNING ${f}"
+sqlline -f ${f}
+done

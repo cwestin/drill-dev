@@ -1,0 +1,51 @@
+#!/bin/bash
+if [ $# -eq 0 ] ; then
+  echo "allnodes [-n|--noheader] [-l|--includelocal] [-p|--parallel] \"command\""
+  exit 1
+fi
+
+parallel=0
+header=1
+local=0
+CMD=
+while [ "$1" != "" ] ; do
+  case "$1" in
+    "-n"|"--noheader" )
+      header=0 ;;
+    "-l"|"--includelocal" )
+      local=1 ;;
+    "-p"|"--parallel" )
+      parallel=1 ;;
+    * )
+      CMD="${CMD} $1" ;;
+  esac
+  shift
+done
+
+IPS=$(ifconfig 2>/dev/null | grep "inet addr:" | awk -F: '{print $2}' | awk '{print $1}' | tr '\n' ' ')
+IPS="$IPS `hostname`"
+
+#Kunal: for scale-56
+###IPS="10.10.99.56 scale-56"
+
+for node in `cat /root/bin/cluster.conf`
+do
+  if [ $local -eq 0 ] && echo $IPS | grep $node &> /dev/null ; then
+    [ $header -eq 1 ] && 
+      #echo "-----------------------------" && \
+      echo "Skipping node ${node}" && \
+      #echo "-----------------------------"
+    continue
+  fi
+
+  [ $header -eq 1 ] && 
+    #echo "-----------------------------" && \
+    #echo Running on node ${node} && \
+    #echo "-----------------------------"
+  if [ $parallel -eq 1 ] ; then
+    ssh ${node} ${CMD} &
+  else
+    ssh ${node} ${CMD}
+  fi
+done
+wait
