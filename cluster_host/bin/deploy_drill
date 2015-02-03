@@ -14,7 +14,7 @@ mvn clean install -DskipInterpreter -DskipTests -Pmapr
 stop_drillbits
 
 # assume that the first node in the cluster conf is this one
-DRILL_CTRL = `head -n 1 /root/bin/cluster.conf`
+DRILL_CTRL=`head -n 1 /root/bin/cluster.conf`
 
 . version.sh
 clush -g drillbits rm -rf /opt/mapr/drill/drill-1.0.0/apache-drill-$version/

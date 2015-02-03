@@ -11,6 +11,7 @@ do this on the "main" machine, which will control the others.
 ssh-keygen, so that a password is not required when logging in from one node
 to another in the cluster.
  - simple instructions here if you need them: https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2
+   - make sure to give the master access to itself in this way as well
 
 (*) Steps for various directories:
 bin
