@@ -15,7 +15,8 @@ stop_drillbits
 
 # assume that the first node in the cluster conf is this one
 DRILL_CTRL=`head -n 1 /root/bin/cluster.conf`
+DRILL_DIR=/opt/mapr/drill/drill-1.0.0
 
 . version.sh
 clush -g drillbits rm -rf /opt/mapr/drill/drill-1.0.0/apache-drill-$version/
-clush -g drillbits "scp -r $DRILL_CTRL:/root/src/drill/distribution/target/apache-drill-$version/apache-drill-$version /opt/mapr/drill/drill-1.0.0/"
+clush -g drillbits "mkdir -p $DRILL_DIR;scp -r $DRILL_CTRL:/root/src/drill/distribution/target/apache-drill-$version/apache-drill-$version $DRILL_DIR"
