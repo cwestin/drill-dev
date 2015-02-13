@@ -1,3 +1,10 @@
+-- eclipse_formatter_apache.xml ------------------------------------------------
+
+Eclipse formatter specifications for the ASF style guidelines.
+
+Use this in Eclipse by going to Prefereces > Java > Code Style > Formatter and
+importing it.
+
 -- lifecycle-mapping-metadata.xml ----------------------------------------------
 
 Use this in Eclipse by going to Preferences > Maven > Lifecycle Mappings and
